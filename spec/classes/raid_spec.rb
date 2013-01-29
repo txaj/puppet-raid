@@ -58,6 +58,26 @@ describe 'raid' do
 
     end
 
+    describe "With LSI Logic / Symbios Logic - LSI MegaRAID SAS TB - megaraid_sas" do
+
+      let(:facts) do
+        {
+          :raid_bus_controller_0_vendor => "LSI Logic / Symbios Logic",
+          :raid_bus_controller_0_device => "MegaRAID SAS TB",
+          :raid_bus_controller_0_driver => "megaraid_sas"
+        }
+      end
+
+      it { should_not contain_notify 'No RAID Controller found' }
+      it { should contain_package 'megaclisas-status' }
+      it { should contain_package 'megacli' }
+      it { should contain_class 'raid::package' }
+      it { should contain_class 'raid::service' }
+      it { should contain_class 'raid::nagios' }
+      it { should contain_file('/usr/sbin/check-raid').with_target('/usr/sbin/megaclisas-status') }
+
+    end
+
     describe "With LSI Logic / Symbios Logic - SAS2008 PCI-Express Fusion-MPT SAS-2 [Falcon] - mpt2sas" do
 
       let(:facts) do
