@@ -29,7 +29,7 @@ describe 'raid' do
     it { should_not contain_class 'raid::service' }
     it { should_not contain_class 'raid::nagios' }
     it { should contain_class 'raid::repo::debian' }
-    it { should contain_apt__source 'raid' }
+    it { should contain_apt__source('raid').with_key('23B3D3B4') }
 
     describe "No RAID Controller" do
         it { should contain_notify 'No RAID Controller found' }
