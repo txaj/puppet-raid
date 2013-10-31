@@ -4,6 +4,6 @@ class raid::repo::debian {
     release    => $::lsbdistcodename,
     repos      => 'main',
     key        => '23B3D3B4',
-    key_source => 'http://hwraid.le-vert.net/debian/hwraid.le-vert.net.gpg.key',
+    key_server => 'pgp.mit.edu',
   }
 }
