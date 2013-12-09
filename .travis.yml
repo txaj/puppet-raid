@@ -2,11 +2,10 @@ language: ruby
 rvm:
   - 1.8.7
   - 1.9.3
-script: bundle exec rake lint && bundle exec rake spec
+script: bundle exec rake spec
 env:
-  - PUPPET_VERSION=2.6.9
-  - PUPPET_VERSION=2.7.14
-  - PUPPET_VERSION=2.7.19
+  - PUPPET_VERSION=2.7.23
+
 matrix:
   exclude:
     - rvm: 1.9.3
