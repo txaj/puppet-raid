@@ -4,6 +4,6 @@ class raid::repo::debian {
     release    => $::lsbdistcodename,
     repos      => 'main',
     key        => '23B3D3B4',
-    key_server => 'subkeys.pgp.net',
+    key_server => 'keyserver.ubuntu.com',
   }
 }
