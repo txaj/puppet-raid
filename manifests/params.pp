@@ -12,7 +12,8 @@ class raid::params {
   case $controller_0_vendor {
     /^LSI/: {
       case $controller_0_device {
-        'LSI MegaSAS 9260', 'MegaRAID SAS TB': {
+        'LSI MegaSAS 9260', 'MegaRAID SAS TB',
+        'MegaRAID SAS 2208 [Thunderbolt]': {
           $packages = [ 'megaclisas-status', 'megacli' ]
           $nagioscheck = [ '/usr/sbin/megaclisas-status' ]
           $service = 'megaclisas-statusd'
