@@ -29,6 +29,20 @@ class raid::params {
         }
       }
     }
+    /^Hewlett-Packard Company/:{
+      case $controller_0_device {
+        'Smart Array Gen8 Controllers': {
+          $packages = [ 'cciss-vol-status', 'hpacucli' ]
+          $nagioscheck = [ '/usr/sbin/cciss_vol_status' ]
+          $service = 'cciss-vol-statusd'
+        }
+        default: {
+          notify {
+            "Unsupported RAID Device: ${controller_0_device}":
+          }
+        }
+      }
+    }
     default: {
       notify { "Unsupported RAID Vendor: ${controller_0_vendor}": }
     }
