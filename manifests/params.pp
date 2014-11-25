@@ -50,6 +50,17 @@ class raid::params (
         }
       }
     }
+    /^Intel Corporation$/:{
+      case $controller_0_device {
+        default: {
+          if ($verbose) {
+            notify {
+              "Unsupported RAID Device: ${controller_0_device}":
+            }
+          }
+        }
+      }
+    }
     default: {
       if ($verbose) {
         notify { "Unsupported RAID Vendor: ${controller_0_vendor}": }
