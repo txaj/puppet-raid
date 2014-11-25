@@ -52,6 +52,9 @@ class raid::params (
     }
     /^Intel Corporation$/:{
       case $controller_0_device {
+        /^C602/: {
+          # Software RAID chipset
+        }
         default: {
           if ($verbose) {
             notify {
