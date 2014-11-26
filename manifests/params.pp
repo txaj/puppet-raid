@@ -1,5 +1,6 @@
 class raid::params (
-  $verbose = true,
+  $report_unsupported = true,
+  $report_nodevice = true,
 ){
   if !$controller_0_vendor and $::raid_bus_controller_0_vendor {
     $controller_0_vendor = $::raid_bus_controller_0_vendor
@@ -26,7 +27,7 @@ class raid::params (
           $service = 'sas2ircu-statusd'
         }
         default: {
-          if ($verbose) {
+          if ($report_unsupported) {
             notify {
               "Unsupported RAID Device: ${controller_0_device}":
             }
@@ -42,7 +43,7 @@ class raid::params (
           $service = 'cciss-vol-statusd'
         }
         default: {
-          if ($verbose) {
+          if ($report_unsupported) {
             notify {
               "Unsupported RAID Device: ${controller_0_device}":
             }
@@ -56,7 +57,7 @@ class raid::params (
           # Software RAID chipset
         }
         default: {
-          if ($verbose) {
+          if ($report_unsupported) {
             notify {
               "Unsupported RAID Device: ${controller_0_device}":
             }
@@ -65,12 +66,12 @@ class raid::params (
       }
     }
     default: {
-      if ($verbose) {
+      if ($report_unsupported) {
         notify { "Unsupported RAID Vendor: ${controller_0_vendor}": }
       }
     }
     undef: {
-      if ($verbose) {
+      if ($report_nodevice) {
         notify { 'No RAID Controller found': }
       }
     }

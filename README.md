@@ -13,6 +13,15 @@ Simply install and `include raid` in your node definition. I will do the rest. O
 
 You can check `/usr/sbin/check-raid` afterwards or simply point Nagios NRPE to command `/usr/sbin/check-raid --nagios`.
 
+Don't forget to generate the sudoers configuration. This snippet might help you : 
+``
+  exec { 'check_raid_setup_sudoers':
+    command     => '/usr/lib/nagios/plugins/check_raid -S',
+    unless      => 'grep "Lines matching CHECK_RAID added by" /etc/sudoers',
+    refreshonly => true,
+  }
+``
+
 What's configurable?
 --------------------
 
@@ -22,6 +31,8 @@ There are some global variables you can set to configure e-mail based monitoring
  * Set `raid_mailto` to mail address or system user
  * Set `raid_period` to set seconds between checks
  * Set `raid_remind` to set seconds between remind mails
+ * Set `raid::params::report_unsupported` to false to avoid being notify{}ed when there is a unsupported device
+ * Set `raid::params::report_nodevice` to false to avoid being notify{}ed when there no hardware raid controller detected
 
 
 puppet version
